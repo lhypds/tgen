@@ -50,41 +50,6 @@ export default function App() {
     }
   }
 
-  function createShareUrl(functionName) {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams();
-    params.set("function", functionName);
-
-    if (functionName === "function1") {
-      if (f1Template) {
-        params.set("templete", f1Template);
-      }
-      if (f1InputJson) {
-        params.set("input", f1InputJson);
-      }
-    }
-
-    if (functionName === "function2") {
-      if (f2Input) {
-        params.set("input", f2Input);
-      }
-      if (f2Template1) {
-        params.set("templete1", f2Template1);
-      }
-      if (f2Template2) {
-        params.set("templete2", f2Template2);
-      }
-    }
-
-    url.search = params.toString();
-    return url.toString();
-  }
-
-  async function shareFunction(functionName) {
-    const shareUrl = createShareUrl(functionName);
-    await copyText(shareUrl);
-  }
-
   const selectedFunction = queryData.function;
   const showFunction1 = !selectedFunction || selectedFunction === "function1";
   const showFunction2 = !selectedFunction || selectedFunction === "function2";
@@ -95,6 +60,7 @@ export default function App() {
 
       {showFunction1 && (
         <Function
+          functionName="function1"
           title="function1"
           description={[
             "Provide a string template with {} and text.",
@@ -125,12 +91,12 @@ export default function App() {
           ]}
           result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.value}
           onCopy={copyText}
-          onShare={() => shareFunction("function1")}
         />
       )}
 
       {showFunction2 && (
         <Function
+          functionName="function2"
           title="function2"
           description={[
             "Provide a string 1, and template 1, and template 2.",
@@ -171,7 +137,6 @@ export default function App() {
           ]}
           result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.value}
           onCopy={copyText}
-          onShare={() => shareFunction("function2")}
         />
       )}
     </main>

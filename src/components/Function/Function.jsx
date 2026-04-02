@@ -2,7 +2,28 @@ import React from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { title, description, fields, result, onShare } = props;
+  const { title, description, fields, result, functionName } = props;
+
+  async function handleShare() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams();
+    params.set("function", functionName);
+
+    for (const field of fields) {
+      if (!field.key || !field.value) {
+        continue;
+      }
+      params.set(field.key, field.value);
+    }
+
+    url.search = params.toString();
+
+    try {
+      await navigator.clipboard.writeText(url.toString());
+    } catch (error) {
+      console.error("Failed to copy share url", error);
+    }
+  }
 
   return (
     <section className={styles.card}>
@@ -15,7 +36,7 @@ export default function Function(props) {
             {description[1]}
           </div>
         </div>
-        <button type="button" className={styles.shareButton} onClick={onShare}>
+        <button type="button" className={styles.shareButton} onClick={handleShare}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
             <circle cx="18" cy="5" r="3" />
             <circle cx="6" cy="12" r="3" />
