@@ -42,10 +42,12 @@ export default function Function(props) {
       fn.fields.map((field) => ({
         ...field,
         onChange: (event) =>
-          setArgs((prev) => ({
-            ...prev,
-            [field.key]: event.target.value, // Update the args's value when input changes
-          })),
+          setArgs((prev) => {
+            return {
+              ...prev,
+              [field.key]: event.target.value, // Update the args's value when input changes
+            };
+          }),
       })),
     [args],
   );
