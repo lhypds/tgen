@@ -49,21 +49,20 @@ export default function App() {
               type: "text",
               inputbox: "textarea",
               rows: 4,
-              value: f1Template,
               placeholder: "Today's weather is {weather}.",
               onChange: (event) => setF1Template(event.target.value),
             },
             {
-              key: "input",
+              key: "params_",
               label: "Input JSON",
               type: "json",
               inputbox: "textarea",
               rows: 8,
-              value: f1InputJson,
               placeholder: '{\n  "weather": "sunny"\n}',
               onChange: (event) => setF1InputJson(event.target.value),
             },
           ]}
+          arguments_={{ template: f1Template, params_: f1InputJson }}
           result={function1.result}
         />
       )}
@@ -80,7 +79,6 @@ export default function App() {
               type: "text",
               inputbox: "textarea",
               rows: 4,
-              value: f2Input,
               placeholder: "Paris is France's capital.",
               onChange: (event) => setF2Input(event.target.value),
             },
@@ -90,7 +88,6 @@ export default function App() {
               type: "text",
               inputbox: "textarea",
               rows: 4,
-              value: f2Template1,
               placeholder: "{capital} is {country}'s capital.",
               onChange: (event) => setF2Template1(event.target.value),
             },
@@ -100,11 +97,11 @@ export default function App() {
               type: "text",
               inputbox: "textarea",
               rows: 4,
-              value: f2Template2,
               placeholder: "The capital of {country} is {capital}.",
               onChange: (event) => setF2Template2(event.target.value),
             },
           ]}
+          arguments_={{ input: f2Input, template1: f2Template1, template2: f2Template2 }}
           result={function2.result}
         />
       )}
