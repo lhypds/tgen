@@ -21,8 +21,13 @@ export default function Function(props) {
   // Search params to initial args
   const searchParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const selectedFunction = searchParams.get("function");
-  if (selectedFunction && selectedFunction !== fn.name) {
-    return null;
+  let isFunctionPage = false;
+  if (selectedFunction) {
+    if (selectedFunction !== fn.name) {
+      return null;
+    } else {
+      isFunctionPage = true;
+    }
   }
 
   const [args, setArgs] = useState(() => buildInitialArgs(fn, searchParams));
@@ -133,12 +138,14 @@ export default function Function(props) {
             <div className={styles.description}>{fn.description}</div>
           </div>
           <div className={styles.headerActions}>
-            <button type="button" className={styles.actionButton} onClick={handleEdit}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
-                <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
-                <path d="M14 6l3 3" />
-              </svg>
-            </button>
+            {isFunctionPage && (
+              <button type="button" className={styles.actionButton} onClick={handleEdit}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
+                  <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
+                  <path d="M14 6l3 3" />
+                </svg>
+              </button>
+            )}
             <button type="button" className={styles.actionButton} onClick={handleShare}>
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
                 <circle cx="18" cy="5" r="3" />
