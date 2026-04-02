@@ -13,21 +13,8 @@ export default function App() {
   const [f2Template1, setF2Template1] = useState(queryData.f2?.templete1 ?? "");
   const [f2Template2, setF2Template2] = useState(queryData.f2?.templete2 ?? "");
 
-  const f1Result = useMemo(() => {
-    try {
-      return { value: function1(f1Template, f1InputJson), error: null };
-    } catch (error) {
-      return { value: "", error: error.message };
-    }
-  }, [f1InputJson, f1Template]);
-
-  const f2Result = useMemo(() => {
-    try {
-      return { value: function2(f2Input, f2Template1, f2Template2), error: null };
-    } catch (error) {
-      return { value: "", error: error.message };
-    }
-  }, [f2Input, f2Template1, f2Template2]);
+  const f1Result = useMemo(() => function1(f1Template, f1InputJson), [f1InputJson, f1Template]);
+  const f2Result = useMemo(() => function2(f2Input, f2Template1, f2Template2), [f2Input, f2Template1, f2Template2]);
 
   const selectedFunction = queryData.function;
   const showFunction1 = !selectedFunction || selectedFunction === "function1";
@@ -69,7 +56,7 @@ export default function App() {
               onChange: (event) => setF1InputJson(event.target.value),
             },
           ]}
-          result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.value}
+          result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.text}
         />
       )}
 
@@ -113,7 +100,7 @@ export default function App() {
               onChange: (event) => setF2Template2(event.target.value),
             },
           ]}
-          result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.value}
+          result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.text}
         />
       )}
     </main>
