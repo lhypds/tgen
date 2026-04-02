@@ -9,7 +9,8 @@ tgen
 Functions
 ---------
 
-function1: Provide a string template with {} and text.  
+function1: Replacer
+Provide a string template with {} and text.  
 Generate a string by replacing the {} with the corresponding values from the parameters.  
 
 Example:  
@@ -20,7 +21,8 @@ input (json):
 }
 result: "Today's weather is sunny."  
 
-function2: Provide a string 1, and template 1, and template 2.  
+function2: Extractor & Replacer
+Provide a string 1, and template 1, and template 2.  
 Read parameters from template 1, and generate a string based on template 2.  
 
 Example:  
@@ -38,3 +40,10 @@ To include literal curly braces in the output, use double curly braces in the te
 Example:  
 template: "The set is represented as {{a, b, c}}."  
 result: "The set is represented as {a, b, c}."  
+
+
+Useful Features
+---------------
+
+Sharing functions with user pre-filled parameters.  
+Use a share button to generate a URL that encodes the function and its parameters.  
