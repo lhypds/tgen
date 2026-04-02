@@ -61,6 +61,26 @@ export default function Function(props) {
     }
   }
 
+  async function handleEdit() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams();
+
+    // Set function
+    params.set("function", fn.name);
+
+    // Set template args
+    for (const key of Object.keys(fn.templateArgs)) {
+      params.set(key, args[key]);
+    }
+
+    url.search = params.toString();
+    try {
+      await navigator.clipboard.writeText(url.toString());
+    } catch (error) {
+      console.error("Failed to copy share url", error);
+    }
+  }
+
   async function handleTitleClick() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
@@ -89,15 +109,23 @@ export default function Function(props) {
           </div>
           <div className={styles.description}>{fn.description}</div>
         </div>
-        <button type="button" className={styles.shareButton} onClick={handleShare}>
-          <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
-            <circle cx="18" cy="5" r="3" />
-            <circle cx="6" cy="12" r="3" />
-            <circle cx="18" cy="19" r="3" />
-            <path d="M8.59 13.51l6.83 3.98" />
-            <path d="M15.41 6.51L8.59 10.49" />
-          </svg>
-        </button>
+        <div className={styles.headerActions}>
+          <button type="button" className={styles.actionButton} onClick={handleEdit}>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
+              <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
+              <path d="M14 6l3 3" />
+            </svg>
+          </button>
+          <button type="button" className={styles.actionButton} onClick={handleShare}>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <path d="M8.59 13.51l6.83 3.98" />
+              <path d="M15.41 6.51L8.59 10.49" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div className={styles.arguments}>

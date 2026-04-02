@@ -47,15 +47,26 @@
   gap: 12px;
 }
 
-.shareButton {
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actionButton {
   display: inline-flex;
   align-items: center;
   border: 1px solid black;
   background: #ffffff;
   color: #0f172a;
-  padding: 4px 4px;
+  padding: 4px 6px;
   font: inherit;
   cursor: pointer;
+}
+
+.actionButton:hover {
+  background: black;
+  color: white;
 }
 
 .shareIcon {
@@ -68,9 +79,14 @@
   stroke-linejoin: round;
 }
 
-.shareButton:hover {
-  background: black;
-  color: white;
+.editIcon {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .description {
