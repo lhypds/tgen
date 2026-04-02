@@ -1,13 +1,9 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$ROOT_DIR"
+# Load PORT from .env, default to 3190
+PORT=$(grep -E '^PORT=' .env 2>/dev/null | cut -d '=' -f2)
+PORT=${PORT:-3190}
 
-if [ ! -d "node_modules" ]; then
-	echo "Dependencies not found. Running setup first..."
-	"$ROOT_DIR/setup.sh"
+if pm2 start ecosystem.config.js; then
+  echo "Server started at http://localhost:$PORT"
 fi
-
-echo "Starting dev server..."
-npm run dev
