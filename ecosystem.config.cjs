@@ -13,7 +13,7 @@ module.exports = {
   apps: [
     {
       name: "tgen",
-      script: "serve",
+      script: "node_modules/.bin/serve",
       args: ["-s", "dist", "-l", `tcp:${port}`],
       cwd: __dirname,
       env: {
