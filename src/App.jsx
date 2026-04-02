@@ -56,7 +56,9 @@ export default function App() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>tgen</h1>
+      <h1 className={styles.title}>
+        <a href="/">tgen</a>
+      </h1>
 
       {showFunction1 && (
         <Function

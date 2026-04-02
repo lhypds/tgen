@@ -6,4 +6,9 @@
 
 .title {
   margin: 0 0 8px;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
