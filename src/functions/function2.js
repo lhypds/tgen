@@ -1,5 +1,4 @@
-import { function1 } from './function1';
-import { buildCaptureRegex, extractKeys } from '../utils/templeteUtils';
+import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
 
 export function function2(input, template1, template2) {
   const keys = extractKeys(template1);
@@ -19,5 +18,14 @@ export function function2(input, template1, template2) {
     params[key] = match.groups[key] ?? '';
   }
 
-  return function1(template2, params);
+  const prepared = prepareEscapes(template2);
+  const result = prepared.replace(TOKEN_REGEX, (_, key) => {
+    const normalizedKey = key.trim();
+    if (!(normalizedKey in params)) {
+      throw new Error(`Missing parameter: ${normalizedKey}`);
+    }
+    return String(params[normalizedKey]);
+  });
+
+  return restoreEscapes(result);
 }

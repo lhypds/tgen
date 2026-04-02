@@ -3,18 +3,6 @@ import { function1, function2, parseFunctionQuery } from "./functions";
 import Function from "./components/Function";
 import styles from "./app.module.css";
 
-function buildParamsFromJson(jsonText) {
-  if (!jsonText.trim()) {
-    return {};
-  }
-
-  const parsed = JSON.parse(jsonText);
-  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
-    throw new Error("f1_input_json must be a JSON object");
-  }
-  return parsed;
-}
-
 export default function App() {
   const queryData = useMemo(() => parseFunctionQuery(window.location.search), []);
 
@@ -27,8 +15,7 @@ export default function App() {
 
   const f1Result = useMemo(() => {
     try {
-      const params = buildParamsFromJson(f1InputJson);
-      return { value: function1(f1Template, params), error: null };
+      return { value: function1(f1Template, f1InputJson), error: null };
     } catch (error) {
       return { value: "", error: error.message };
     }
@@ -41,14 +28,6 @@ export default function App() {
       return { value: "", error: error.message };
     }
   }, [f2Input, f2Template1, f2Template2]);
-
-  async function copyText(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (error) {
-      console.error("Failed to copy text", error);
-    }
-  }
 
   const selectedFunction = queryData.function;
   const showFunction1 = !selectedFunction || selectedFunction === "function1";
@@ -94,7 +73,6 @@ export default function App() {
             },
           ]}
           result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.value}
-          onCopy={copyText}
         />
       )}
 
@@ -143,7 +121,6 @@ export default function App() {
             },
           ]}
           result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.value}
-          onCopy={copyText}
         />
       )}
     </main>
