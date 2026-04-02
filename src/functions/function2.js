@@ -2,14 +2,14 @@ import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_R
 
 export const function2 = {
   name: "function2",
-  title: "Function2",
+  title: "Extractor & Replacer",
   description: "Provide an input string, a template1 with {} as placeholders, and a template2 with {} as placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {} in template2 with the extracted values.",
   fields: [
     {
       key: "input",
       label: "Input",
       type: "text",
-      rows: 4,
+      rows: 6,
       placeholder: "Paris is France's capital.",
       triggerUpdates: [],
     },
@@ -17,7 +17,7 @@ export const function2 = {
       key: "template1",
       label: "Template Input",
       type: "text",
-      rows: 4,
+      rows: 6,
       placeholder: "{capital} is {country}'s capital.",
       triggerUpdates: [],
     },
@@ -25,7 +25,7 @@ export const function2 = {
       key: "template2",
       label: "Template Output",
       type: "text",
-      rows: 4,
+      rows: 6,
       placeholder: "The capital of {country} is {capital}.",
       triggerUpdates: [],
     },

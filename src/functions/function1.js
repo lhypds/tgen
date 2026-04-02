@@ -3,14 +3,14 @@ import { buildObjectFromJson } from '../utils/jsonUtils';
 
 export const function1 = {
   name: "function1",
-  title: "Function1",
+  title: "Replacer",
   description: "Provide a string template with {} and text. Generate a string by replacing the {} with the corresponding values from the parameters.",
   fields: [
     {
       key: "template",
       label: "Template",
       type: "text",
-      rows: 4,
+      rows: 6,
       placeholder: "Today's weather is {weather}.",
       triggerUpdates: [
         {
@@ -23,7 +23,7 @@ export const function1 = {
       key: "input",
       label: "Input JSON",
       type: "json",
-      rows: 8,
+      rows: 10,
       placeholder: '{\n  "weather": "sunny"\n}',
       triggerUpdates: [],
     },
