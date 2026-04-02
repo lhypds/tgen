@@ -4,21 +4,17 @@ import Function from "./components/Function";
 import styles from "./app.module.css";
 
 export default function App() {
-  const queryData = useMemo(() => parseFunctionQuery(window.location.search), []);
+  const queryParams = useMemo(() => parseFunctionQuery(window.location.search), []);
 
-  const [f1Template, setF1Template] = useState(queryData.f1?.templete ?? "");
-  const [f1InputJson, setF1InputJson] = useState(queryData.f1?.input ?? "");
+  const [f1Template, setF1Template] = useState(queryParams.f1?.templete ?? "");
+  const [f1InputJson, setF1InputJson] = useState(queryParams.f1?.input ?? "");
 
-  const [f2Input, setF2Input] = useState(queryData.f2?.input ?? "");
-  const [f2Template1, setF2Template1] = useState(queryData.f2?.templete1 ?? "");
-  const [f2Template2, setF2Template2] = useState(queryData.f2?.templete2 ?? "");
+  const [f2Input, setF2Input] = useState(queryParams.f2?.input ?? "");
+  const [f2Template1, setF2Template1] = useState(queryParams.f2?.templete1 ?? "");
+  const [f2Template2, setF2Template2] = useState(queryParams.f2?.templete2 ?? "");
 
   const f1Result = useMemo(() => function1(f1Template, f1InputJson), [f1InputJson, f1Template]);
   const f2Result = useMemo(() => function2(f2Input, f2Template1, f2Template2), [f2Input, f2Template1, f2Template2]);
-
-  const selectedFunction = queryData.function;
-  const showFunction1 = !selectedFunction || selectedFunction === "function1";
-  const showFunction2 = !selectedFunction || selectedFunction === "function2";
 
   return (
     <main className={styles.main}>
@@ -26,7 +22,7 @@ export default function App() {
         <a href="/">tgen</a>
       </h1>
 
-      {showFunction1 && (
+      {(!queryParams.function || queryParams.function === "function1") && (
         <Function
           function_="function1"
           title="Function1"
@@ -60,7 +56,7 @@ export default function App() {
         />
       )}
 
-      {showFunction2 && (
+      {(!queryParams.function || queryParams.function === "function2") && (
         <Function
           function_="function2"
           title="Function2"
