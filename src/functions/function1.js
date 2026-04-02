@@ -23,6 +23,9 @@ export const function1 = {
       placeholder: '{\n  "weather": "sunny"\n}',
     },
   ],
+  templateArgs: {
+    template: "",
+  },
   args: {
     template: "",
     input: "",

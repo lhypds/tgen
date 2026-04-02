@@ -2,36 +2,42 @@ import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { function_ } = props;
+  const { fn } = props;
 
   // Search params to initial args
   const searchParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const selectedFunction = searchParams.get("function");
-  if (selectedFunction && selectedFunction !== function_.name) {
+  if (selectedFunction && selectedFunction !== fn.name) {
     return null;
   }
 
-  const buildInitialArgs = (fn) => {
-    const initialArgs = { ...fn.args };
-    for (const key of Object.keys(initialArgs)) {
-      const value = searchParams.get(key);
-      if (value !== null) {
-        initialArgs[key] = value;
+  const initialArgs = useMemo(
+    () => (fn) => {
+      const initialArgs = { ...fn.args };
+      for (const key of Object.keys(initialArgs)) {
+        const value = searchParams.get(key);
+        if (value !== null) {
+          initialArgs[key] = value;
+        }
       }
-    }
-    return initialArgs;
-  };
-  const initialArgs = useMemo(() => buildInitialArgs(function_), [function_]);
+      return initialArgs;
+    },
+    [fn],
+  );
 
   const [args, setArgs] = useState(() => ({ ...initialArgs }));
-  const result = useMemo(() => function_.exec(args), [args]);
+  const result = useMemo(() => fn.exec(args), [args]);
 
+  // For the input fields
   const fields = useMemo(
     () =>
-      function_.fields.map((field) => ({
+      fn.fields.map((field) => ({
         ...field,
-        value: args[field.key] ?? "",
-        onChange: (event) => setArgs((prev) => ({ ...prev, [field.key]: event.target.value })),
+        onChange: (event) =>
+          setArgs((prev) => ({
+            ...prev,
+            [field.key]: event.target.value, // Update the args's value
+          })),
       })),
     [args],
   );
@@ -39,17 +45,16 @@ export default function Function(props) {
   async function handleShare() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
-    params.set("function", function_.name);
 
-    for (const field of fields) {
-      if (!field.key || !args[field.key]) {
-        continue;
-      }
-      params.set(field.key, args[field.key]);
+    // Set function
+    params.set("function", fn.name);
+
+    // Set args
+    for (const key of Object.keys(fn.templateArgs)) {
+      params.set(key, args[key]);
     }
 
     url.search = params.toString();
-
     try {
       await navigator.clipboard.writeText(url.toString());
     } catch (error) {
@@ -62,10 +67,10 @@ export default function Function(props) {
       <div className={styles.header}>
         <div className={styles.titleDescription}>
           <div className={styles.titleRow}>
-            <div className={styles.title}>{function_.title}</div>
-            <div className={styles.functionName}>(`{function_.name}`)</div>
+            <div className={styles.title}>{fn.title}</div>
+            <div className={styles.functionName}>(`{fn.name}`)</div>
           </div>
-          <div className={styles.description}>{function_.description}</div>
+          <div className={styles.description}>{fn.description}</div>
         </div>
         <button type="button" className={styles.shareButton} onClick={handleShare}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
@@ -88,7 +93,12 @@ export default function Function(props) {
 
               {/* textarea or static value */}
               {field.inputbox === "textarea" ? (
-                <textarea rows={field.rows ?? 4} value={field.value} onChange={field.onChange} placeholder={field.placeholder} />
+                <textarea
+                  rows={field.rows ?? 4}
+                  value={args[field.key]}
+                  onChange={field.onChange}
+                  placeholder={field.placeholder}
+                />
               ) : (
                 <pre>{args[field.key]}</pre>
               )}

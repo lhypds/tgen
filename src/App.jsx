@@ -11,8 +11,8 @@ export default function App() {
       </h1>
 
       {/* Functions */}
-      <Function function_={function1} />
-      <Function function_={function2} />
+      <Function fn={function1} />
+      <Function fn={function2} />
     </main>
   );
 }

@@ -30,6 +30,10 @@ export const function2 = {
       placeholder: "The capital of {country} is {capital}.",
     },
   ],
+  templateArgs: {
+    template1: "",
+    template2: "",
+  },
   args: {
     input: "",
     template1: "",
