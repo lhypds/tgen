@@ -141,7 +141,8 @@ export default function Function(props) {
             </div>
             <div className={styles.description}>{fn.description}</div>
           </div>
-          <div className={styles.headerActions}>
+
+          <div className={styles.actions}>
             {isFunctionPage && (
               <button type="button" className={styles.actionButton} onClick={handleEdit}>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
