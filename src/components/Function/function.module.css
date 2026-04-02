@@ -25,13 +25,9 @@
   font-weight: 700;
 }
 
-.titleLink {
-  color: inherit;
-  text-decoration: none;
-}
-
-.titleLink:hover {
+.title:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .functionName {

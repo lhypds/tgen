@@ -48,7 +48,7 @@ export default function Function(props) {
     // Set function
     params.set("function", fn.name);
 
-    // Set args
+    // Set template args
     for (const key of Object.keys(fn.templateArgs)) {
       params.set(key, args[key]);
     }
@@ -61,12 +61,30 @@ export default function Function(props) {
     }
   }
 
+  async function handleTitleClick() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams();
+
+    // Set function
+    params.set("function", fn.name);
+
+    // Set args
+    for (const key of Object.keys(fn.args)) {
+      params.set(key, args[key]);
+    }
+
+    url.search = params.toString();
+    window.location.assign(url.toString());
+  }
+
   return (
     <section className={styles.card}>
       <div className={styles.header}>
         <div className={styles.titleDescription}>
           <div className={styles.titleRow}>
-            <div className={styles.title}>{fn.title}</div>
+            <div className={styles.title} onClick={handleTitleClick}>
+              {fn.title}
+            </div>
             <div className={styles.functionName}>(`{fn.name}`)</div>
           </div>
           <div className={styles.description}>{fn.description}</div>
