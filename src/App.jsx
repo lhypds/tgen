@@ -105,9 +105,10 @@ export default function App() {
           }}
           fields={[
             {
-              label: "`template`",
+              label: "Template",
               type: "textarea",
               rows: 4,
+              key: "template",
               value: f1Template,
               placeholder: "Today's weather is {weather}.",
               onChange: (event) => setF1Template(event.target.value),
@@ -116,12 +117,13 @@ export default function App() {
               label: "Input JSON",
               type: "textarea",
               rows: 8,
+              key: "input",
               value: f1InputJson,
               placeholder: '{\n  "weather": "sunny"\n}',
               onChange: (event) => setF1InputJson(event.target.value),
             },
           ]}
-          resultText={f1Result.error ? `Error: ${f1Result.error}` : f1Result.value}
+          result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.value}
           onCopy={copyText}
           onShare={() => shareFunction("function1")}
         />
@@ -143,28 +145,31 @@ export default function App() {
               label: "Input",
               type: "textarea",
               rows: 4,
+              key: "input",
               value: f2Input,
               placeholder: "Paris is France's capital.",
               onChange: (event) => setF2Input(event.target.value),
             },
             {
-              label: "`template1`",
+              label: "`Template Input`",
               type: "textarea",
               rows: 4,
+              key: "template1",
               value: f2Template1,
               placeholder: "{capital} is {country}'s capital.",
               onChange: (event) => setF2Template1(event.target.value),
             },
             {
-              label: "`template2`",
+              label: "Template Output",
               type: "textarea",
               rows: 4,
+              key: "template2",
               value: f2Template2,
               placeholder: "The capital of {country} is {capital}.",
               onChange: (event) => setF2Template2(event.target.value),
             },
           ]}
-          resultText={f2Result.error ? `Error: ${f2Result.error}` : f2Result.value}
+          result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.value}
           onCopy={copyText}
           onShare={() => shareFunction("function2")}
         />

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { title, description, fields, resultText, onShare } = props;
+  const { title, description, fields, result, onShare } = props;
 
   return (
     <section className={styles.card}>
@@ -32,7 +32,9 @@ export default function Function(props) {
         <div className={styles.grid}>
           {fields.map((field) => (
             <div key={field.label}>
-              <label>{field.label}</label>
+              <label>
+                {field.label} (`{field.key}`)
+              </label>
 
               {/* textarea or static value */}
               {field.type === "textarea" ? (
@@ -47,7 +49,7 @@ export default function Function(props) {
 
       <div className={styles.result}>
         <label>Result</label>
-        <pre>{resultText}</pre>
+        <pre>{result}</pre>
       </div>
     </section>
   );
