@@ -58,7 +58,9 @@ export default function Function(props) {
     params.set("function", fn.name);
 
     // Set title
-    params.set("title", searchParams.get("title") || fn.title);
+    if (isFunctionPage) {
+      params.set("title", searchParams.get("title") || fn.title);
+    }
 
     // Set template args
     for (const key of Object.keys(fn.templateArgs)) {
@@ -107,7 +109,9 @@ export default function Function(props) {
     params.set("function", fn.name);
 
     // Set title
-    params.set("title", searchParams.get("title") || fn.title);
+    if (isFunctionPage) {
+      params.set("title", searchParams.get("title") || fn.title);
+    }
 
     // Set args
     for (const key of Object.keys(fn.args)) {

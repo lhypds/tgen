@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 6px;
 }
 
 .heading {
@@ -24,6 +24,7 @@
 }
 
 .actions {
+  margin-top: 8px;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
