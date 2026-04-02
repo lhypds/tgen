@@ -25,6 +25,15 @@
   font-weight: 700;
 }
 
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.titleLink:hover {
+  text-decoration: underline;
+}
+
 .functionName {
   font-size: 15px;
   font-weight: bold;

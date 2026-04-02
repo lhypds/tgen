@@ -5,7 +5,8 @@
 }
 
 .title {
-  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: bold;
 
   a {
     color: inherit;

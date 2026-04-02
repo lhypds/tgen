@@ -6,13 +6,15 @@ import styles from "./app.module.css";
 export default function App() {
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>
+      <div className={styles.title}>
         <a href="/">tgen</a>
-      </h1>
+      </div>
 
       {/* Functions */}
-      <Function fn={function1} />
-      <Function fn={function2} />
+      <div>
+        <Function fn={function1} />
+        <Function fn={function2} />
+      </div>
     </main>
   );
 }
