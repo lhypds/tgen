@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
 import { showToast } from "../../ui";
 import { copyText } from "../../utils/copyUtils";
+import { extractKeys } from "../../utils/templeteUtils";
+import { buildObjectFromJson } from "../../utils/jsonUtils";
 import Edit from "./Edit";
 
 const buildInitialArgs = (fn, searchParams) => {
@@ -43,10 +45,33 @@ export default function Function(props) {
         ...field,
         onChange: (event) =>
           setArgs((prev) => {
-            return {
-              ...prev,
-              [field.key]: event.target.value, // Update the args's value when input changes
-            };
+            const newValue = event.target.value;
+
+            // Update the changed field
+            const updated = { ...prev, [field.key]: newValue };
+
+            // Trigger updates
+            if (field.triggerUpdates && field.triggerUpdates.length > 0) {
+              for (const update of field.triggerUpdates) {
+                if (update.method === "extract_keys") {
+                  const keys = extractKeys(newValue);
+                  let existing = {};
+                  try {
+                    existing = buildObjectFromJson(prev[update.field] ?? "");
+                  } catch {
+                    existing = {};
+                  }
+                  // Keep existing values for keys still present, add new keys with "", remove stale keys
+                  const merged = {};
+                  for (const key of keys) {
+                    merged[key] = key in existing ? existing[key] : "";
+                  }
+                  updated[update.field] = keys.length > 0 ? JSON.stringify(merged, null, 2) : "";
+                }
+              }
+            }
+
+            return updated;
           }),
       })),
     [args],

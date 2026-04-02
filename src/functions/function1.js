@@ -12,6 +12,12 @@ export const function1 = {
       type: "text",
       rows: 4,
       placeholder: "Today's weather is {weather}.",
+      triggerUpdates: [
+        {
+          "field": "input",
+          "method": 'extract_keys',  // trigger input update when template changes
+        }
+      ]
     },
     {
       key: "input",
@@ -19,6 +25,7 @@ export const function1 = {
       type: "json",
       rows: 8,
       placeholder: '{\n  "weather": "sunny"\n}',
+      triggerUpdates: [],
     },
   ],
   shareArgs: ["template"],  // for creating shareable functions

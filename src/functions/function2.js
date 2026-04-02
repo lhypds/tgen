@@ -11,6 +11,7 @@ export const function2 = {
       type: "text",
       rows: 4,
       placeholder: "Paris is France's capital.",
+      triggerUpdates: [],
     },
     {
       key: "template1",
@@ -18,6 +19,7 @@ export const function2 = {
       type: "text",
       rows: 4,
       placeholder: "{capital} is {country}'s capital.",
+      triggerUpdates: [],
     },
     {
       key: "template2",
@@ -25,6 +27,7 @@ export const function2 = {
       type: "text",
       rows: 4,
       placeholder: "The capital of {country} is {capital}.",
+      triggerUpdates: [],
     },
   ],
   shareArgs: ["template1", "template2"],
