@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { f1, f2, parseFunctionQuery } from "./functions";
+import { function1, function2, parseFunctionQuery } from "./functions";
 import Function from "./components/Function";
 import styles from "./app.module.css";
 
@@ -28,7 +28,7 @@ export default function App() {
   const f1Result = useMemo(() => {
     try {
       const params = buildParamsFromJson(f1InputJson);
-      return { value: f1(f1Template, params), error: null };
+      return { value: function1(f1Template, params), error: null };
     } catch (error) {
       return { value: "", error: error.message };
     }
@@ -36,7 +36,7 @@ export default function App() {
 
   const f2Result = useMemo(() => {
     try {
-      return { value: f2(f2Input, f2Template1, f2Template2), error: null };
+      return { value: function2(f2Input, f2Template1, f2Template2), error: null };
     } catch (error) {
       return { value: "", error: error.message };
     }
@@ -120,7 +120,7 @@ export default function App() {
               onChange: (event) => setF2Input(event.target.value),
             },
             {
-              label: "`Template Input`",
+              label: "Template Input",
               type: "text",
               inputbox: "textarea",
               rows: 4,

@@ -1,6 +1,6 @@
 import { prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
 
-export function f1(template, params) {
+export function function1(template, params) {
   if (!template.trim() || !params) {
     return 'Invalid.';
   }

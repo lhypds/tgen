@@ -1,7 +1,7 @@
-import { f1 } from './f1';
+import { function1 } from './function1';
 import { buildCaptureRegex, extractKeys } from '../utils/templeteUtils';
 
-export function f2(input, template1, template2) {
+export function function2(input, template1, template2) {
   const keys = extractKeys(template1);
   const regex = buildCaptureRegex(template1);
   const match = input.match(regex);
@@ -19,5 +19,5 @@ export function f2(input, template1, template2) {
     params[key] = match.groups[key] ?? '';
   }
 
-  return f1(template2, params);
+  return function1(template2, params);
 }
