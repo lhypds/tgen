@@ -5,6 +5,28 @@ export const function1 = {
   name: "function1",
   title: "Function1",
   description: "Provide a string template with {} and text. Generate a string by replacing the {} with the corresponding values from the parameters.",
+  fields: [
+    {
+      key: "template",
+      label: "Template",
+      type: "text",
+      inputbox: "textarea",
+      rows: 4,
+      placeholder: "Today's weather is {weather}.",
+    },
+    {
+      key: "params_",
+      label: "Input JSON",
+      type: "json",
+      inputbox: "textarea",
+      rows: 8,
+      placeholder: '{\n  "weather": "sunny"\n}',
+    },
+  ],
+  args: {
+    template: "",
+    params_: "",
+  },
   exec(args) {
     try {
       if (!args.template.trim()) {

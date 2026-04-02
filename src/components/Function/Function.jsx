@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { title, description, fields, arguments_, result, function_ } = props;
+  const { title, description, fields, args, result, function_ } = props;
 
   async function handleShare() {
     const url = new URL(window.location.href);
@@ -60,7 +60,7 @@ export default function Function(props) {
               {field.inputbox === "textarea" ? (
                 <textarea rows={field.rows ?? 4} value={field.value} onChange={field.onChange} placeholder={field.placeholder} />
               ) : (
-                <pre>{arguments_[field.key]}</pre>
+                <pre>{args[field.key]}</pre>
               )}
             </div>
           ))}

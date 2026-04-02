@@ -6,30 +6,19 @@ import styles from "./app.module.css";
 export default function App() {
   const queryParams = useMemo(() => parseFunctionQuery(window.location.search), []);
 
-  const [f1Template, setF1Template] = useState(queryParams.f1?.templete ?? "");
-  const [f1InputJson, setF1InputJson] = useState(queryParams.f1?.input ?? "");
+  const [f1Args, setF1Args] = useState({
+    template: queryParams.f1?.templete ?? "",
+    params_: queryParams.f1?.input ?? "",
+  });
 
-  const [f2Input, setF2Input] = useState(queryParams.f2?.input ?? "");
-  const [f2Template1, setF2Template1] = useState(queryParams.f2?.templete1 ?? "");
-  const [f2Template2, setF2Template2] = useState(queryParams.f2?.templete2 ?? "");
+  const [f2Args, setF2Args] = useState({
+    input: queryParams.f2?.input ?? "",
+    template1: queryParams.f2?.templete1 ?? "",
+    template2: queryParams.f2?.templete2 ?? "",
+  });
 
-  useMemo(
-    () =>
-      function1.exec({
-        template: f1Template ?? "",
-        params_: f1InputJson ?? "",
-      }),
-    [f1InputJson, f1Template],
-  );
-  useMemo(
-    () =>
-      function2.exec({
-        input: f2Input ?? "",
-        template1: f2Template1 ?? "",
-        template2: f2Template2 ?? "",
-      }),
-    [f2Input, f2Template1, f2Template2],
-  );
+  useMemo(() => function1.exec(f1Args), [f1Args]);
+  useMemo(() => function2.exec(f2Args), [f2Args]);
 
   return (
     <main className={styles.main}>
@@ -42,27 +31,12 @@ export default function App() {
           function_={function1.name}
           title={function1.title}
           description={function1.description}
-          fields={[
-            {
-              key: "template",
-              label: "Template",
-              type: "text",
-              inputbox: "textarea",
-              rows: 4,
-              placeholder: "Today's weather is {weather}.",
-              onChange: (event) => setF1Template(event.target.value),
-            },
-            {
-              key: "params_",
-              label: "Input JSON",
-              type: "json",
-              inputbox: "textarea",
-              rows: 8,
-              placeholder: '{\n  "weather": "sunny"\n}',
-              onChange: (event) => setF1InputJson(event.target.value),
-            },
-          ]}
-          arguments_={{ template: f1Template, params_: f1InputJson }}
+          fields={function1.fields.map((field) => ({
+            ...field,
+            value: f1Args[field.key],
+            onChange: (event) => setF1Args((prev) => ({ ...prev, [field.key]: event.target.value })),
+          }))}
+          args={f1Args}
           result={function1.result}
         />
       )}
@@ -72,36 +46,12 @@ export default function App() {
           function_={function2.name}
           title={function2.title}
           description={function2.description}
-          fields={[
-            {
-              key: "input",
-              label: "Input",
-              type: "text",
-              inputbox: "textarea",
-              rows: 4,
-              placeholder: "Paris is France's capital.",
-              onChange: (event) => setF2Input(event.target.value),
-            },
-            {
-              key: "template1",
-              label: "Template Input",
-              type: "text",
-              inputbox: "textarea",
-              rows: 4,
-              placeholder: "{capital} is {country}'s capital.",
-              onChange: (event) => setF2Template1(event.target.value),
-            },
-            {
-              key: "template2",
-              label: "Template Output",
-              type: "text",
-              inputbox: "textarea",
-              rows: 4,
-              placeholder: "The capital of {country} is {capital}.",
-              onChange: (event) => setF2Template2(event.target.value),
-            },
-          ]}
-          arguments_={{ input: f2Input, template1: f2Template1, template2: f2Template2 }}
+          fields={function2.fields.map((field) => ({
+            ...field,
+            value: f2Args[field.key],
+            onChange: (event) => setF2Args((prev) => ({ ...prev, [field.key]: event.target.value })),
+          }))}
+          args={f2Args}
           result={function2.result}
         />
       )}

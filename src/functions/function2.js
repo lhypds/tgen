@@ -4,6 +4,37 @@ export const function2 = {
   name: "function2",
   title: "Function2",
   description: "Provide an input string, a template1 with {} as placeholders, and a template2 with {} as placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {} in template2 with the extracted values.",
+  fields: [
+    {
+      key: "input",
+      label: "Input",
+      type: "text",
+      inputbox: "textarea",
+      rows: 4,
+      placeholder: "Paris is France's capital.",
+    },
+    {
+      key: "template1",
+      label: "Template Input",
+      type: "text",
+      inputbox: "textarea",
+      rows: 4,
+      placeholder: "{capital} is {country}'s capital.",
+    },
+    {
+      key: "template2",
+      label: "Template Output",
+      type: "text",
+      inputbox: "textarea",
+      rows: 4,
+      placeholder: "The capital of {country} is {capital}.",
+    },
+  ],
+  args: {
+    input: "",
+    template1: "",
+    template2: "",
+  },
   exec(args) {
     try {
       const keys = extractKeys(args.template1);
