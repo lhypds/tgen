@@ -2,7 +2,26 @@ import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { function_, initialArgs } = props;
+  const { function_ } = props;
+
+  // Search params to initial args
+  const searchParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  const selectedFunction = searchParams.get("function");
+  if (selectedFunction && selectedFunction !== function_.name) {
+    return null;
+  }
+
+  const buildInitialArgs = (fn) => {
+    const initialArgs = { ...fn.args };
+    for (const key of Object.keys(initialArgs)) {
+      const value = searchParams.get(key);
+      if (value !== null) {
+        initialArgs[key] = value;
+      }
+    }
+    return initialArgs;
+  };
+  const initialArgs = useMemo(() => buildInitialArgs(function_), [function_]);
 
   const [args, setArgs] = useState(() => ({ ...initialArgs }));
   const result = useMemo(() => function_.exec(args), [args]);

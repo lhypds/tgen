@@ -15,7 +15,7 @@ export const function1 = {
       placeholder: "Today's weather is {weather}.",
     },
     {
-      key: "params_",
+      key: "input",
       label: "Input JSON",
       type: "json",
       inputbox: "textarea",
@@ -25,7 +25,7 @@ export const function1 = {
   ],
   args: {
     template: "",
-    params_: "",
+    input: "",
   },
   exec(args) {
     try {
@@ -34,7 +34,8 @@ export const function1 = {
         return this.result;
       }
 
-      const params = buildObjectFromJson(args.params_ ?? '');
+      // Params in string {}
+      const params = buildObjectFromJson(args.input ?? '');
 
       const prepared = prepareEscapes(args.template);
       const output = prepared.replace(TOKEN_REGEX, (_, key) => {
