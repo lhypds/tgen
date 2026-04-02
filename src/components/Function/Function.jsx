@@ -1,6 +1,17 @@
 import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
 
+const buildInitialArgs = (fn, searchParams) => {
+  const initialArgs = { ...fn.args };
+  for (const key of Object.keys(initialArgs)) {
+    const value = searchParams.get(key);
+    if (value !== null) {
+      initialArgs[key] = value;
+    }
+  }
+  return initialArgs;
+};
+
 export default function Function(props) {
   const { fn } = props;
 
@@ -11,21 +22,9 @@ export default function Function(props) {
     return null;
   }
 
-  const initialArgs = useMemo(
-    () => (fn) => {
-      const initialArgs = { ...fn.args };
-      for (const key of Object.keys(initialArgs)) {
-        const value = searchParams.get(key);
-        if (value !== null) {
-          initialArgs[key] = value;
-        }
-      }
-      return initialArgs;
-    },
-    [fn],
-  );
+  const [args, setArgs] = useState(() => buildInitialArgs(fn, searchParams));
 
-  const [args, setArgs] = useState(() => ({ ...initialArgs }));
+  // Update result when args change
   const result = useMemo(() => fn.exec(args), [args]);
 
   // For the input fields
@@ -36,7 +35,7 @@ export default function Function(props) {
         onChange: (event) =>
           setArgs((prev) => ({
             ...prev,
-            [field.key]: event.target.value, // Update the args's value
+            [field.key]: event.target.value, // Update the args's value when input changes
           })),
       })),
     [args],
