@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { title, description, fields, args, result, function_ } = props;
+  const { function_, initialArgs } = props;
+
+  const [args, setArgs] = useState(() => ({ ...initialArgs }));
+  const result = useMemo(() => function_.exec(args), [args]);
+
+  const fields = useMemo(
+    () =>
+      function_.fields.map((field) => ({
+        ...field,
+        value: args[field.key] ?? "",
+        onChange: (event) => setArgs((prev) => ({ ...prev, [field.key]: event.target.value })),
+      })),
+    [args],
+  );
 
   async function handleShare() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
-    params.set("function", function_);
+    params.set("function", function_.name);
 
     for (const field of fields) {
-      if (!field.key || !field.value) {
+      if (!field.key || !args[field.key]) {
         continue;
       }
-      params.set(field.key, field.value);
+      params.set(field.key, args[field.key]);
     }
 
     url.search = params.toString();
@@ -30,10 +43,10 @@ export default function Function(props) {
       <div className={styles.header}>
         <div className={styles.titleDescription}>
           <div className={styles.titleRow}>
-            <div className={styles.title}>{title}</div>
-            <div className={styles.functionName}>(`{function_}`)</div>
+            <div className={styles.title}>{function_.title}</div>
+            <div className={styles.functionName}>(`{function_.name}`)</div>
           </div>
-          <div className={styles.description}>{description}</div>
+          <div className={styles.description}>{function_.description}</div>
         </div>
         <button type="button" className={styles.shareButton} onClick={handleShare}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
@@ -45,8 +58,6 @@ export default function Function(props) {
           </svg>
         </button>
       </div>
-
-      <div className={styles.description}></div>
 
       <div className={styles.arguments}>
         <div className={styles.grid}>
