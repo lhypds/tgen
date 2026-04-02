@@ -13,7 +13,7 @@ export default function App() {
   const [f2Template1, setF2Template1] = useState(queryParams.f2?.templete1 ?? "");
   const [f2Template2, setF2Template2] = useState(queryParams.f2?.templete2 ?? "");
 
-  const f1Result = useMemo(
+  useMemo(
     () =>
       function1.exec({
         template: f1Template ?? "",
@@ -21,7 +21,7 @@ export default function App() {
       }),
     [f1InputJson, f1Template],
   );
-  const f2Result = useMemo(
+  useMemo(
     () =>
       function2.exec({
         input: f2Input ?? "",
@@ -64,7 +64,7 @@ export default function App() {
               onChange: (event) => setF1InputJson(event.target.value),
             },
           ]}
-          result={f1Result.error ? `Error: ${f1Result.error}` : f1Result.text}
+          result={function1.result.error ? `Error: ${function1.result.error}` : function1.result.text}
         />
       )}
 
@@ -105,7 +105,7 @@ export default function App() {
               onChange: (event) => setF2Template2(event.target.value),
             },
           ]}
-          result={f2Result.error ? `Error: ${f2Result.error}` : f2Result.text}
+          result={function2.result.error ? `Error: ${function2.result.error}` : function2.result.text}
         />
       )}
     </main>

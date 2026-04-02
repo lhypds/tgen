@@ -1,51 +1,18 @@
 import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
 
-export const exec = (args) => {
-  try {
-    const keys = extractKeys(args.template1);
-    const regex = buildCaptureRegex(args.template1);
-    const match = args.input.match(regex);
-
-    if (!args.input.trim() || !args.template1.trim() || !args.template2.trim()) {
-      return { text: 'Invalid.', error: null };
-    }
-
-    if (!match || !match.groups) {
-      throw new Error('Input does not match template1');
-    }
-
-    const params = {};
-    for (const key of keys) {
-      params[key] = match.groups[key] ?? '';
-    }
-
-    const prepared = prepareEscapes(args.template2);
-    const result = prepared.replace(TOKEN_REGEX, (_, key) => {
-      const normalizedKey = key.trim();
-      if (!(normalizedKey in params)) {
-        throw new Error(`Missing parameter: ${normalizedKey}`);
-      }
-      return String(params[normalizedKey]);
-    });
-
-    return { text: restoreEscapes(result), error: null };
-  } catch (error) {
-    return { text: '', error: error.message };
-  }
-}
-
 export const function2 = {
   name: "function2",
   title: "Function2",
   description: "Provide an input string, a template1 with {} as placeholders, and a template2 with {} as placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {} in template2 with the extracted values.",
-  exec: (args) => {
+  exec(args) {
     try {
       const keys = extractKeys(args.template1);
       const regex = buildCaptureRegex(args.template1);
       const match = args.input.match(regex);
 
       if (!args.input.trim() || !args.template1.trim() || !args.template2.trim()) {
-        return { text: 'Invalid.', error: null };
+        this.result = { text: 'Invalid.', error: null };
+        return this.result;
       }
 
       if (!match || !match.groups) {
@@ -58,7 +25,7 @@ export const function2 = {
       }
 
       const prepared = prepareEscapes(args.template2);
-      const result = prepared.replace(TOKEN_REGEX, (_, key) => {
+      const output = prepared.replace(TOKEN_REGEX, (_, key) => {
         const normalizedKey = key.trim();
         if (!(normalizedKey in params)) {
           throw new Error(`Missing parameter: ${normalizedKey}`);
@@ -66,9 +33,12 @@ export const function2 = {
         return String(params[normalizedKey]);
       });
 
-      return { text: restoreEscapes(result), error: null };
+      this.result = { text: restoreEscapes(output), error: null };
+      return this.result;
     } catch (error) {
-      return { text: '', error: error.message };
+      this.result = { text: '', error: error.message };
+      return this.result;
     }
   },
+  result: { text: '', error: null },
 }

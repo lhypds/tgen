@@ -5,16 +5,17 @@ export const function1 = {
   name: "function1",
   title: "Function1",
   description: "Provide a string template with {} and text. Generate a string by replacing the {} with the corresponding values from the parameters.",
-  exec: (args) => {
+  exec(args) {
     try {
       if (!args.template.trim()) {
-        return { text: 'Invalid.', error: null };
+        this.result = { text: 'Invalid.', error: null };
+        return this.result;
       }
 
       const params = buildObjectFromJson(args.params_ ?? '');
 
       const prepared = prepareEscapes(args.template);
-      const result = prepared.replace(TOKEN_REGEX, (_, key) => {
+      const output = prepared.replace(TOKEN_REGEX, (_, key) => {
         const normalizedKey = key.trim();
         if (!(normalizedKey in params)) {
           throw new Error(`Missing parameter: ${normalizedKey}`);
@@ -22,9 +23,12 @@ export const function1 = {
         return String(params[normalizedKey]);
       });
 
-      return { text: restoreEscapes(result), error: null };
+      this.result = { text: restoreEscapes(output), error: null };
+      return this.result;
     } catch (error) {
-      return { text: '', error: error.message };
+      this.result = { text: '', error: error.message };
+      return this.result;
     }
   },
+  result: { text: '', error: null },
 }
