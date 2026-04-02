@@ -47,9 +47,6 @@ export default function App() {
             "Provide a string template with {} and text.",
             "Generate a string by replacing the {} with the corresponding values from the parameters.",
           ]}
-          arguments={{
-            template: "`template`",
-          }}
           fields={[
             {
               label: "Template",
@@ -84,10 +81,6 @@ export default function App() {
             "Provide a string 1, and template 1, and template 2.",
             "Read parameters from template 1, and generate a string based on template 2 with the extracted parameters.",
           ]}
-          arguments={{
-            template1: "`template1`",
-            template2: "`template2`",
-          }}
           fields={[
             {
               label: "Input",
