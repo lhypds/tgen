@@ -65,24 +65,7 @@ export default function Function(props) {
   }
 
   async function handleEdit() {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams();
-
-    // Set function
-    params.set("function", fn.name);
-
-    // Set template args
-    for (const key of Object.keys(fn.templateArgs)) {
-      params.set(key, args[key]);
-    }
-
-    url.search = params.toString();
-    const copied = await copyText(url.toString());
-    if (copied) {
-      showToast("Link copied to clipboard");
-    } else {
-      showToast("Failed to copy link");
-    }
+    // TODO: open a modal to edit the function title.
   }
 
   async function handleTitleClick() {
