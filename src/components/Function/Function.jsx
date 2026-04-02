@@ -33,6 +33,8 @@ export default function Function(props) {
           {fields.map((field) => (
             <div key={field.label}>
               <label>{field.label}</label>
+
+              {/* textarea or static value */}
               {field.type === "textarea" ? (
                 <textarea rows={field.rows ?? 4} value={field.value} onChange={field.onChange} placeholder={field.placeholder} />
               ) : (
