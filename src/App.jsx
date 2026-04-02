@@ -60,7 +60,7 @@ export default function App() {
 
       {showFunction1 && (
         <Function
-          functionName="function1"
+          function_="function1"
           title="function1"
           description={[
             "Provide a string template with {} and text.",
@@ -98,7 +98,7 @@ export default function App() {
 
       {showFunction2 && (
         <Function
-          functionName="function2"
+          function_="function2"
           title="function2"
           description={[
             "Provide a string 1, and template 1, and template 2.",

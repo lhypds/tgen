@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./function.module.css";
 
 export default function Function(props) {
-  const { title, description, fields, result, functionName } = props;
+  const { title, description, fields, result, function_ } = props;
 
   async function handleShare() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
-    params.set("function", functionName);
+    params.set("function", function_);
 
     for (const field of fields) {
       if (!field.key || !field.value) {
