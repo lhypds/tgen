@@ -1,14 +1,17 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 
-const port = Number(process.env.PORT) || 5173;
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  const port = Number(env.PORT) || 5173;
 
-export default defineConfig({
-  server: {
-    host: "0.0.0.0",
-    port,
-  },
-  preview: {
-    host: "0.0.0.0",
-    port,
-  },
+  return {
+    server: {
+      host: "0.0.0.0",
+      port,
+    },
+    preview: {
+      host: "0.0.0.0",
+      port,
+    },
+  };
 });
