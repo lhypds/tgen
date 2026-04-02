@@ -58,7 +58,7 @@ export default function Function(props) {
               </label>
 
               {/* textarea or static value */}
-              {field.type === "textarea" ? (
+              {field.inputbox === "textarea" ? (
                 <textarea rows={field.rows ?? 4} value={field.value} onChange={field.onChange} placeholder={field.placeholder} />
               ) : (
                 <pre>{field.value}</pre>

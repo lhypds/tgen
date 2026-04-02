@@ -72,7 +72,8 @@ export default function App() {
           fields={[
             {
               label: "Template",
-              type: "textarea",
+              type: "text",
+              inputbox: "textarea",
               rows: 4,
               key: "template",
               value: f1Template,
@@ -81,7 +82,8 @@ export default function App() {
             },
             {
               label: "Input JSON",
-              type: "textarea",
+              type: "json",
+              inputbox: "textarea",
               rows: 8,
               key: "input",
               value: f1InputJson,
@@ -109,7 +111,8 @@ export default function App() {
           fields={[
             {
               label: "Input",
-              type: "textarea",
+              type: "text",
+              inputbox: "textarea",
               rows: 4,
               key: "input",
               value: f2Input,
@@ -118,7 +121,8 @@ export default function App() {
             },
             {
               label: "`Template Input`",
-              type: "textarea",
+              type: "text",
+              inputbox: "textarea",
               rows: 4,
               key: "template1",
               value: f2Template1,
@@ -127,7 +131,8 @@ export default function App() {
             },
             {
               label: "Template Output",
-              type: "textarea",
+              type: "text",
+              inputbox: "textarea",
               rows: 4,
               key: "template2",
               value: f2Template2,
