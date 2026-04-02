@@ -90,7 +90,7 @@ export default function Function(props) {
         <div className={styles.titleDescription}>
           <div className={styles.titleRow}>
             <div className={styles.title} onClick={handleTitleClick}>
-              {fn.title}
+              {searchParams.get("title") || fn.title}
             </div>
             <div className={styles.functionName}>(`{fn.name}`)</div>
           </div>
