@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./function.module.css";
 import { showToast } from "../../ui";
 import { copyText } from "../../utils/copyUtils";
@@ -35,6 +35,52 @@ export default function Function(props) {
   const [args, setArgs] = useState(() => buildInitialArgs(fn, searchParams));
   const [editOpen, setEditOpen] = useState(false);
 
+  function updateFields(field, newValue, current) {
+    // Update the changed field
+    const updated = {
+      ...current,
+      [field.key]: newValue,
+    };
+
+    // Trigger updates for fields
+    if (field.triggerUpdates && field.triggerUpdates.length > 0) {
+      for (const update of field.triggerUpdates) {
+        // Update method: extract_keys
+        // Extract keys `{}` from a text field to a json field.
+        if (update.method === "extract_keys") {
+          const keys = extractKeys(newValue);
+          let existing = {};
+          try {
+            existing = buildObjectFromJson(current[update.field] ?? "");
+          } catch {
+            existing = {};
+          }
+
+          // Keep existing values for keys still present, add new keys with "", remove stale keys
+          const merged = {};
+          for (const key of keys) {
+            merged[key] = key in existing ? existing[key] : "";
+          }
+          updated[update.field] = keys.length > 0 ? JSON.stringify(merged, null, 2) : "";
+        }
+      }
+    }
+    return updated;
+  }
+
+  // Initialize fields
+  useEffect(() => {
+    setArgs((prev) => {
+      let current = { ...prev };
+
+      // Update if needed
+      for (const field of fn.fields) {
+        current = updateFields(field, current[field.key], current);
+      }
+      return current;
+    });
+  }, []);
+
   // Update result when args change
   const result = useMemo(() => fn.exec(args), [args]);
 
@@ -43,36 +89,7 @@ export default function Function(props) {
     () =>
       fn.fields.map((field) => ({
         ...field,
-        onChange: (event) =>
-          setArgs((prev) => {
-            const newValue = event.target.value;
-
-            // Update the changed field
-            const updated = { ...prev, [field.key]: newValue };
-
-            // Trigger updates
-            if (field.triggerUpdates && field.triggerUpdates.length > 0) {
-              for (const update of field.triggerUpdates) {
-                if (update.method === "extract_keys") {
-                  const keys = extractKeys(newValue);
-                  let existing = {};
-                  try {
-                    existing = buildObjectFromJson(prev[update.field] ?? "");
-                  } catch {
-                    existing = {};
-                  }
-                  // Keep existing values for keys still present, add new keys with "", remove stale keys
-                  const merged = {};
-                  for (const key of keys) {
-                    merged[key] = key in existing ? existing[key] : "";
-                  }
-                  updated[update.field] = keys.length > 0 ? JSON.stringify(merged, null, 2) : "";
-                }
-              }
-            }
-
-            return updated;
-          }),
+        onChange: (event) => setArgs((prev) => updateFields(field, event.target.value, prev)),
       })),
     [args],
   );
@@ -101,10 +118,6 @@ export default function Function(props) {
     } else {
       showToast("Failed to copy link");
     }
-  }
-
-  function handleEdit() {
-    setEditOpen(true);
   }
 
   function handleSaveTitle(newTitle) {
@@ -170,14 +183,17 @@ export default function Function(props) {
           </div>
 
           <div className={styles.actions}>
+            {/* Edit */}
             {isFunctionPage && (
-              <button type="button" className={styles.actionButton} onClick={handleEdit}>
+              <button type="button" className={styles.actionButton} onClick={() => setEditOpen(true)}>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
                   <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
                   <path d="M14 6l3 3" />
                 </svg>
               </button>
             )}
+
+            {/* Share */}
             <button type="button" className={styles.actionButton} onClick={handleShare}>
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
                 <circle cx="18" cy="5" r="3" />
@@ -190,6 +206,7 @@ export default function Function(props) {
           </div>
         </div>
 
+        {/* Fields */}
         <div className={styles.arguments}>
           <div className={styles.grid}>
             {fields.map((field) => (
