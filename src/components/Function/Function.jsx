@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import styles from "./function.module.css";
+import { showToast } from "../../ui";
+import { copyText } from "../../utils/copyUtils";
 
 const buildInitialArgs = (fn, searchParams) => {
   const initialArgs = { ...fn.args };
@@ -54,10 +56,11 @@ export default function Function(props) {
     }
 
     url.search = params.toString();
-    try {
-      await navigator.clipboard.writeText(url.toString());
-    } catch (error) {
-      console.error("Failed to copy share url", error);
+    const copied = await copyText(url.toString());
+    if (copied) {
+      showToast("Link copied to clipboard");
+    } else {
+      showToast("Failed to copy link");
     }
   }
 
@@ -74,10 +77,11 @@ export default function Function(props) {
     }
 
     url.search = params.toString();
-    try {
-      await navigator.clipboard.writeText(url.toString());
-    } catch (error) {
-      console.error("Failed to copy share url", error);
+    const copied = await copyText(url.toString());
+    if (copied) {
+      showToast("Link copied to clipboard");
+    } else {
+      showToast("Failed to copy link");
     }
   }
 
