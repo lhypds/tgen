@@ -62,9 +62,9 @@ export default function Function(props) {
       params.set("title", searchParams.get("title") || fn.title);
     }
 
-    // Set template args
-    for (const key of Object.keys(fn.templateArgs)) {
-      params.set(key, args[key]);
+    // Set share args, for creating shareable function links
+    for (const shareArg of fn.shareArgs) {
+      params.set(shareArg, args[shareArg]);
     }
 
     url.search = params.toString();
