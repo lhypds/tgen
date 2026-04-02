@@ -33,11 +33,7 @@ export default function Function(props) {
             <div className={styles.title}>{title}</div>
             <div className={styles.functionName}>(`{function_}`)</div>
           </div>
-          <div className={styles.description}>
-            {description[0]}
-            <br />
-            {description[1]}
-          </div>
+          <div className={styles.description}>{description}</div>
         </div>
         <button type="button" className={styles.shareButton} onClick={handleShare}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>

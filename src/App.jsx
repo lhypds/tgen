@@ -15,7 +15,7 @@ export default function App() {
 
   const f1Result = useMemo(
     () =>
-      function1({
+      function1.exec({
         template: f1Template ?? "",
         params_: f1InputJson ?? "",
       }),
@@ -23,7 +23,7 @@ export default function App() {
   );
   const f2Result = useMemo(
     () =>
-      function2({
+      function2.exec({
         input: f2Input ?? "",
         template1: f2Template1 ?? "",
         template2: f2Template2 ?? "",
@@ -37,14 +37,11 @@ export default function App() {
         <a href="/">tgen</a>
       </h1>
 
-      {(!queryParams.function || queryParams.function === "function1") && (
+      {(!queryParams.function || queryParams.function === function1.name) && (
         <Function
-          function_="function1"
-          title="Function1"
-          description={[
-            "Provide a string template with {} and text.",
-            "Generate a string by replacing the {} with the corresponding values from the parameters.",
-          ]}
+          function_={function1.name}
+          title={function1.title}
+          description={function1.description}
           fields={[
             {
               label: "Template",
@@ -71,14 +68,11 @@ export default function App() {
         />
       )}
 
-      {(!queryParams.function || queryParams.function === "function2") && (
+      {(!queryParams.function || queryParams.function === function2.name) && (
         <Function
-          function_="function2"
-          title="Function2"
-          description={[
-            "Provide a string 1, and template 1, and template 2.",
-            "Read parameters from template 1, and generate a string based on template 2 with the extracted parameters.",
-          ]}
+          function_={function2.name}
+          title={function2.title}
+          description={function2.description}
           fields={[
             {
               label: "Input",
