@@ -1,0 +1,111 @@
+.card {
+  background: #ffffff;
+  border: 1px solid black;
+  padding: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titleDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.shareButton {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid black;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 4px 4px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shareIcon {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.shareButton:hover {
+  background: black;
+  color: white;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.card textarea,
+.card input {
+  width: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.card textarea {
+  resize: vertical;
+}
+
+.card pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #f1f5f9;
+  padding: 12px;
+}
+
+.arguments {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.result {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

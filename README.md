@@ -1,0 +1,40 @@
+
+tgen
+====
+
+
+`tgen` provides string generation functions.  
+
+
+Functions
+---------
+
+function1: Provide a string template with {} and text.  
+Generate a string by replacing the {} with the corresponding values from the parameters.  
+
+Example:  
+arg1: template: "Today's weather is {weather}."  
+input (json):  
+{
+    "weather": "sunny"
+}
+result: "Today's weather is sunny."  
+
+function2: Provide a string 1, and template 1, and template 2.  
+Read parameters from template 1, and generate a string based on template 2.  
+
+Example:  
+arg1: template1: "{capital} is {country}'s capital."  
+arg2: template2: "The capital of {country} is {capital}."  
+input: "Paris is France's capital."  
+result: "The capital of France is Paris."  
+
+
+Escape Characters
+-----------------
+
+To include literal curly braces in the output, use double curly braces in the template.  
+
+Example:  
+template: "The set is represented as {{a, b, c}}."  
+result: "The set is represented as {a, b, c}."  

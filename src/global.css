@@ -1,0 +1,38 @@
+@import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html,
+body {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  font-family: "Fira Code VF", Helvetica, sans-serif;
+  margin: 10px 10px 20px 10px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+textarea:focus,
+input:focus,
+textarea:focus-visible,
+input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
