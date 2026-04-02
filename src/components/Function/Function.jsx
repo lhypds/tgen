@@ -70,7 +70,7 @@ export default function Function(props) {
       <div className={styles.result}>
         <label>Result</label>
         <div>
-          <pre>{result}</pre>
+          <pre>{result.error ? `Error: ${result.error}` : result.text}</pre>
         </div>
       </div>
     </section>

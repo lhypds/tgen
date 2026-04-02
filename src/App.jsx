@@ -64,7 +64,7 @@ export default function App() {
               onChange: (event) => setF1InputJson(event.target.value),
             },
           ]}
-          result={function1.result.error ? `Error: ${function1.result.error}` : function1.result.text}
+          result={function1.result}
         />
       )}
 
@@ -105,7 +105,7 @@ export default function App() {
               onChange: (event) => setF2Template2(event.target.value),
             },
           ]}
-          result={function2.result.error ? `Error: ${function2.result.error}` : function2.result.text}
+          result={function2.result}
         />
       )}
     </main>
