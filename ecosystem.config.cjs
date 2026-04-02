@@ -14,7 +14,7 @@ module.exports = {
     {
       name: "tgen",
       script: "node_modules/.bin/serve",
-      args: ["-s", "dist", "-l", `tcp:${port}`],
+      args: ["-s", "dist", "-l", String(port)],
       cwd: __dirname,
       env: {
         NODE_ENV: "production",
