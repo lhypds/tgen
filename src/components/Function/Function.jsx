@@ -172,7 +172,7 @@ export default function Function(props) {
                 </label>
 
                 {/* textarea or static value */}
-                {field.inputbox === "textarea" ? (
+                {field.type === "text" || field.type === "json" ? (
                   <textarea
                     rows={field.rows ?? 4}
                     value={args[field.key]}
@@ -180,6 +180,7 @@ export default function Function(props) {
                     placeholder={field.placeholder}
                   />
                 ) : (
+                  // Ineditable
                   <pre>{args[field.key]}</pre>
                 )}
               </div>
