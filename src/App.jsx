@@ -13,8 +13,23 @@ export default function App() {
   const [f2Template1, setF2Template1] = useState(queryParams.f2?.templete1 ?? "");
   const [f2Template2, setF2Template2] = useState(queryParams.f2?.templete2 ?? "");
 
-  const f1Result = useMemo(() => function1(f1Template, f1InputJson), [f1InputJson, f1Template]);
-  const f2Result = useMemo(() => function2(f2Input, f2Template1, f2Template2), [f2Input, f2Template1, f2Template2]);
+  const f1Result = useMemo(
+    () =>
+      function1({
+        template: f1Template ?? "",
+        params_: f1InputJson ?? "",
+      }),
+    [f1InputJson, f1Template],
+  );
+  const f2Result = useMemo(
+    () =>
+      function2({
+        input: f2Input ?? "",
+        template1: f2Template1 ?? "",
+        template2: f2Template2 ?? "",
+      }),
+    [f2Input, f2Template1, f2Template2],
+  );
 
   return (
     <main className={styles.main}>

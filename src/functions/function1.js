@@ -1,15 +1,15 @@
 import { prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
 import { buildObjectFromJson } from '../utils/jsonUtils';
 
-export function function1(template, params_) {
+export function function1(args) {
   try {
-    if (!template.trim()) {
+    if (!args.template.trim()) {
       return { text: 'Invalid.', error: null };
     }
 
-    const params = buildObjectFromJson(params_ ?? '');
+    const params = buildObjectFromJson(args.params_ ?? '');
 
-    const prepared = prepareEscapes(template);
+    const prepared = prepareEscapes(args.template);
     const result = prepared.replace(TOKEN_REGEX, (_, key) => {
       const normalizedKey = key.trim();
       if (!(normalizedKey in params)) {
