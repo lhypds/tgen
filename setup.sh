@@ -23,7 +23,10 @@ else
   echo "  .env already exists, skipping."
 fi
 
-echo "[4/4] Building..."
+echo "[4/5] Installing serve..."
+npm install -g serve
+
+echo "[5/5] Building..."
 npm run build
 
 echo "Setup complete."
