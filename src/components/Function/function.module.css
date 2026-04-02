@@ -8,6 +8,12 @@
   gap: 12px;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .titleDescription {
   display: flex;
   flex-direction: column;
@@ -17,6 +23,11 @@
 .title {
   font-size: 20px;
   font-weight: 700;
+}
+
+.functionName {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .description {

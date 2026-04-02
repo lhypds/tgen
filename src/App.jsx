@@ -42,7 +42,7 @@ export default function App() {
       {showFunction1 && (
         <Function
           function_="function1"
-          title="function1"
+          title="Function1"
           description={[
             "Provide a string template with {} and text.",
             "Generate a string by replacing the {} with the corresponding values from the parameters.",
@@ -76,7 +76,7 @@ export default function App() {
       {showFunction2 && (
         <Function
           function_="function2"
-          title="function2"
+          title="Function2"
           description={[
             "Provide a string 1, and template 1, and template 2.",
             "Read parameters from template 1, and generate a string based on template 2 with the extracted parameters.",

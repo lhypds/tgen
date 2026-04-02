@@ -29,7 +29,10 @@ export default function Function(props) {
     <section className={styles.card}>
       <div className={styles.header}>
         <div className={styles.titleDescription}>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.titleRow}>
+            <div className={styles.title}>{title}</div>
+            <div className={styles.functionName}>(`{function_}`)</div>
+          </div>
           <div className={styles.description}>
             {description[0]}
             <br />
@@ -70,7 +73,9 @@ export default function Function(props) {
 
       <div className={styles.result}>
         <label>Result</label>
-        <pre>{result}</pre>
+        <div>
+          <pre>{result}</pre>
+        </div>
       </div>
     </section>
   );
