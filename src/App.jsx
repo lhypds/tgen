@@ -7,14 +7,14 @@ export default function App() {
   const queryParams = useMemo(() => parseFunctionQuery(window.location.search), []);
 
   const [f1Args, setF1Args] = useState({
-    template: queryParams.f1?.templete ?? "",
+    template: queryParams.f1?.template ?? "",
     params_: queryParams.f1?.input ?? "",
   });
 
   const [f2Args, setF2Args] = useState({
     input: queryParams.f2?.input ?? "",
-    template1: queryParams.f2?.templete1 ?? "",
-    template2: queryParams.f2?.templete2 ?? "",
+    template1: queryParams.f2?.template1 ?? "",
+    template2: queryParams.f2?.template2 ?? "",
   });
 
   useMemo(() => function1.exec(f1Args), [f1Args]);
