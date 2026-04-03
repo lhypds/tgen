@@ -5,7 +5,7 @@ import { copyText } from "../../utils/copyUtils";
 import { extractKeys } from "../../utils/templeteUtils";
 import { buildObjectFromJson } from "../../utils/jsonUtils";
 import Edit from "./Edit";
-import ActionButton from "./ActionButton";
+import { ActionButton } from "../../ui";
 
 const buildInitialArgs = (fn, searchParams) => {
   const initialArgs = { ...fn.args };
