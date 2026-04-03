@@ -5,6 +5,7 @@ import { copyText } from "../../utils/copyUtils";
 import { extractKeys } from "../../utils/templeteUtils";
 import { buildObjectFromJson } from "../../utils/jsonUtils";
 import Edit from "./Edit";
+import ActionButton from "./ActionButton";
 
 const buildInitialArgs = (fn, searchParams) => {
   const initialArgs = { ...fn.args };
@@ -199,24 +200,24 @@ export default function Function(props) {
           <div className={styles.actions}>
             {/* Edit */}
             {isFunctionPage && (
-              <button type="button" className={styles.actionButton} data-tooltip="Edit" onClick={() => setEditOpen(true)}>
-                <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
+              <ActionButton tooltip="Edit" onClick={() => setEditOpen(true)}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
                   <path d="M14 6l3 3" />
                 </svg>
-              </button>
+              </ActionButton>
             )}
 
             {/* Share */}
-            <button type="button" className={styles.actionButton} data-tooltip="Share" onClick={handleShare}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
+            <ActionButton tooltip="Share" onClick={handleShare}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="18" cy="5" r="3" />
                 <circle cx="6" cy="12" r="3" />
                 <circle cx="18" cy="19" r="3" />
                 <path d="M8.59 13.51l6.83 3.98" />
                 <path d="M15.41 6.51L8.59 10.49" />
               </svg>
-            </button>
+            </ActionButton>
           </div>
         </div>
 
@@ -251,12 +252,12 @@ export default function Function(props) {
             <label>Result</label>
 
             {/* Copy */}
-            <button type="button" className={styles.actionButton} data-tooltip="Copy" onClick={handleCopyResult}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
+            <ActionButton tooltip="Copy" onClick={handleCopyResult}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
               </svg>
-            </button>
+            </ActionButton>
           </div>
           <div>
             <pre className={styles.resultText}>{result.error ? `Error: ${result.error}` : result.text}</pre>
