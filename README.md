@@ -6,7 +6,7 @@ tgen
 `tgen` provides basic string generation functions.  
 User also can create fucntions base on it.  
 
-Example:
+Example:  
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/e665c826-925e-46eb-abff-0e20e7b55b48" />
 
 
