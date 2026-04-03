@@ -36,7 +36,7 @@ export const function1 = {
   exec(args) {
     try {
       if (!args.template.trim()) {
-        this.result = { text: 'Invalid.', error: null };
+        this.result = { text: '', error: null };
         return this.result;
       }
 

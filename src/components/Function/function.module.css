@@ -136,6 +136,10 @@
   width: 100%;
 }
 
+.resultText {
+  min-height: 38px;
+}
+
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;

@@ -235,7 +235,7 @@ export default function Function(props) {
         <div className={styles.result}>
           <label>Result</label>
           <div>
-            <pre>{result.error ? `Error: ${result.error}` : result.text}</pre>
+            <pre className={styles.resultText}>{result.error ? `Error: ${result.error}` : result.text}</pre>
           </div>
         </div>
       </section>

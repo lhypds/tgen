@@ -43,7 +43,9 @@ export const function2 = {
       const match = args.input.match(regex);
 
       if (!args.input.trim() || !args.template1.trim() || !args.template2.trim()) {
-        this.result = { text: 'Invalid.', error: null };
+        this.result = {
+          text: '', error: null
+        };
         return this.result;
       }
 
