@@ -76,6 +76,7 @@
 
 .card textarea {
   resize: vertical;
+  min-height: 40px;
 }
 
 .card pre {
