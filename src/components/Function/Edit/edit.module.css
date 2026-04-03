@@ -4,14 +4,22 @@
   gap: 6px;
 }
 
-.heading {
-  margin: 0 0 4px;
-  font-size: 16px;
+.field {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.label {
+  font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .input {
-  width: 100%;
+  flex: 1;
   padding: 8px 10px;
   font-size: 14px;
   border: 1px solid #ccc;

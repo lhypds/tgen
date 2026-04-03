@@ -16,18 +16,20 @@ export default function Edit({ isOpen, onClose, currentTitle, onSave }) {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit">
       <div className={styles.container}>
-        <h3 className={styles.heading}>Edit Title</h3>
-        <input
-          className={styles.input}
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Enter title"
-          autoFocus
-        />
+        <div className={styles.field}>
+          <label className={styles.label}>Title</label>
+          <input
+            className={styles.input}
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Enter value"
+            autoFocus
+          />
+        </div>
         <div className={styles.actions}>
           <button type="button" className={styles.cancelButton} onClick={onClose}>
             Cancel
