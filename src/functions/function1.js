@@ -23,7 +23,7 @@ export const function1 = {
       key: "input",
       label: "Input JSON",
       type: "json",
-      rows: 10,
+      rows: 6,
       placeholder: '{\n  "weather": "sunny"\n}',
       triggerUpdates: [],
     },
