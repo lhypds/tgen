@@ -199,7 +199,7 @@ export default function Function(props) {
           <div className={styles.actions}>
             {/* Edit */}
             {isFunctionPage && (
-              <button type="button" className={styles.actionButton} onClick={() => setEditOpen(true)}>
+              <button type="button" className={styles.actionButton} data-tooltip="Edit" onClick={() => setEditOpen(true)}>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.editIcon}>
                   <path d="M3 21l3.75-.75L19 8l-3-3L3.75 17.25 3 21z" />
                   <path d="M14 6l3 3" />
@@ -208,7 +208,7 @@ export default function Function(props) {
             )}
 
             {/* Share */}
-            <button type="button" className={styles.actionButton} onClick={handleShare}>
+            <button type="button" className={styles.actionButton} data-tooltip="Share" onClick={handleShare}>
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
                 <circle cx="18" cy="5" r="3" />
                 <circle cx="6" cy="12" r="3" />
@@ -251,7 +251,7 @@ export default function Function(props) {
             <label>Result</label>
 
             {/* Copy */}
-            <button type="button" className={styles.actionButton} onClick={handleCopyResult}>
+            <button type="button" className={styles.actionButton} data-tooltip="Copy" onClick={handleCopyResult}>
               <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
