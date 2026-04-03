@@ -3,7 +3,11 @@ tgen
 ====
 
 
-`tgen` provides string generation functions.  
+`tgen` provides basic string generation functions.  
+User also can create fucntions base on it.  
+
+Example:
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/e665c826-925e-46eb-abff-0e20e7b55b48" />
 
 
 Functions
