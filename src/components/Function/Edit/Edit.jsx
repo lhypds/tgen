@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "../../../ui";
+import { Modal } from "@/ui";
 import styles from "./edit.module.css";
 
 export default function Edit({ isOpen, onClose, currentTitle, onSave }) {

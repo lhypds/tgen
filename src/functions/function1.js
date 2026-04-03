@@ -1,5 +1,5 @@
-import { prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
-import { buildObjectFromJson } from '../utils/jsonUtils';
+import { prepareEscapes, restoreEscapes, TOKEN_REGEX } from '@utils/templeteUtils';
+import { buildObjectFromJson } from '@utils/jsonUtils';
 
 export const function1 = {
   name: "function1",

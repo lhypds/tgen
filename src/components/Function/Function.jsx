@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./function.module.css";
-import { showToast } from "../../ui";
-import { copyText } from "../../utils/copyUtils";
-import { extractKeys } from "../../utils/templeteUtils";
-import { buildObjectFromJson } from "../../utils/jsonUtils";
+import { showToast } from "@/ui";
+import { copyText } from "@utils/copyUtils";
+import { extractKeys } from "@utils/templeteUtils";
+import { buildObjectFromJson } from "@utils/jsonUtils";
 import Edit from "./Edit";
-import { ActionButton } from "../../ui";
+import { ActionButton } from "@/ui";
 
 const buildInitialArgs = (fn, searchParams) => {
   const initialArgs = { ...fn.args };

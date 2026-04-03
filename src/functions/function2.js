@@ -1,4 +1,4 @@
-import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_REGEX } from '../utils/templeteUtils';
+import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_REGEX } from '@utils/templeteUtils';
 
 export const function2 = {
   name: "function2",
