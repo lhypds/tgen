@@ -9,7 +9,7 @@ tgen
 Functions
 ---------
 
-function1: Replacer
+function1: Replacer  
 Provide a string template with {} and text.  
 Generate a string by replacing the {} with the corresponding values from the parameters.  
 
@@ -21,7 +21,7 @@ input (json):
 }
 result: "Today's weather is sunny."  
 
-function2: Extractor & Replacer
+function2: Extractor & Replacer  
 Provide a string 1, and template 1, and template 2.  
 Read parameters from template 1, and generate a string based on template 2.  
 
