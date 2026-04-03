@@ -120,6 +120,20 @@ export default function Function(props) {
     }
   }
 
+  async function handleCopyResult() {
+    if (!result.text || result.error) {
+      showToast("Nothing to copy");
+      return;
+    }
+
+    const copied = await copyText(result);
+    if (copied) {
+      showToast("Result copied to clipboard");
+    } else {
+      showToast("Failed to copy result");
+    }
+  }
+
   function handleSaveTitle(newTitle) {
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
@@ -233,7 +247,17 @@ export default function Function(props) {
         </div>
 
         <div className={styles.result}>
-          <label>Result</label>
+          <div className={styles.resultLabelRow}>
+            <label>Result</label>
+
+            {/* Copy */}
+            <button type="button" className={styles.actionButton} onClick={handleCopyResult}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.shareIcon}>
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
           <div>
             <pre className={styles.resultText}>{result.error ? `Error: ${result.error}` : result.text}</pre>
           </div>
