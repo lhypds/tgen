@@ -127,7 +127,7 @@ export default function Function(props) {
       return;
     }
 
-    const copied = await copyText(result);
+    const copied = await copyText(result.text);
     if (copied) {
       showToast("Result copied to clipboard");
     } else {
