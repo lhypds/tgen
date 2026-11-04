@@ -14,11 +14,11 @@ Functions
 ---------
 
 function1: Replacer  
-Provide a string template with {} and text.  
-Generate a string by replacing the {} with the corresponding values from the parameters.  
+Provide a string template with {{key}} placeholders.  
+Generate a string by replacing each {{key}} with the corresponding values from the parameters.  
 
 Example:  
-`template`: "Today's weather is {weather}."  
+`template`: "Today's weather is {{weather}}."  
 input (json):  
 {
     "weather": "sunny"
@@ -30,20 +30,25 @@ Provide a string 1, and template 1, and template 2.
 Read parameters from template 1, and generate a string based on template 2.  
 
 Example:  
-`template1`: "{capital} is {country}'s capital."  
-`template2`: "The capital of {country} is {capital}."  
+`template1`: "{{capital}} is {{country}}'s capital."  
+`template2`: "The capital of {{country}} is {{capital}}."  
 input: "Paris is France's capital."  
 result: "The capital of France is Paris."  
 
 
-Escape Characters
------------------
+Placeholders & Escape Characters
+--------------------------------
 
-To include literal curly braces in the output, use double curly braces in the template.  
+Placeholders use double curly braces: `{{key}}` (spaces are allowed: `{{ key }}`).  
+Keys may contain letters, digits, `_` and `$`, and must not start with a digit.  
+Single braces are plain text, so JSON can be used in templates directly.  
 
 Example:  
-template: "The set is represented as {{a, b, c}}."  
-result: "The set is represented as {a, b, c}."  
+template: `{"user": {"name": "{{name}}"}}`  
+input: `{"name": "Bob"}`  
+result: `{"user": {"name": "Bob"}}`  
+
+To output a literal `{{`, write `\{{` in the template.  
 
 
 Useful Features

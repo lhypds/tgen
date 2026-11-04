@@ -3,7 +3,7 @@ import { buildCaptureRegex, extractKeys, prepareEscapes, restoreEscapes, TOKEN_R
 export const function2 = {
   name: "function2",
   title: "Extractor & Replacer",
-  description: "Provide an input string, a template1 with {} as placeholders, and a template2 with {} as placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {} in template2 with the extracted values.",
+  description: "Provide an input string, a template1 with {{key}} placeholders, and a template2 with {{key}} placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {{key}} in template2 with the extracted values.",
   fields: [
     {
       key: "input",
@@ -18,7 +18,7 @@ export const function2 = {
       label: "Template Input",
       type: "text",
       rows: 6,
-      placeholder: "{capital} is {country}'s capital.",
+      placeholder: "{{capital}} is {{country}}'s capital.",
       triggerUpdates: [],
     },
     {
@@ -26,7 +26,7 @@ export const function2 = {
       label: "Template Output",
       type: "text",
       rows: 6,
-      placeholder: "The capital of {country} is {capital}.",
+      placeholder: "The capital of {{country}} is {{capital}}.",
       triggerUpdates: [],
     },
   ],
@@ -59,8 +59,7 @@ export const function2 = {
       }
 
       const prepared = prepareEscapes(args.template2);
-      const output = prepared.replace(TOKEN_REGEX, (_, key) => {
-        const normalizedKey = key.trim();
+      const output = prepared.replace(TOKEN_REGEX, (_, normalizedKey) => {
         if (!(normalizedKey in params)) {
           throw new Error(`Missing parameter: ${normalizedKey}`);
         }

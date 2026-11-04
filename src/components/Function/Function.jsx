@@ -47,7 +47,7 @@ export default function Function(props) {
     if (field.triggerUpdates && field.triggerUpdates.length > 0) {
       for (const update of field.triggerUpdates) {
         // Update method: extract_keys
-        // Extract keys `{}` from a text field to a json field.
+        // Extract keys `{{key}}` from a text field to a json field.
         if (update.method === "extract_keys") {
           const keys = extractKeys(newValue);
           let existing = {};

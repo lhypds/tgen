@@ -1,11 +1,11 @@
 .main {
-  max-width: 960px;
+  max-width: 768px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 19.2px;
 }
 
 .title {
-  font-size: 32px;
+  font-size: 25.6px;
   font-weight: bold;
 
   a {

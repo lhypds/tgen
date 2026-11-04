@@ -19,6 +19,7 @@ body {
 
 body {
   font-family: "Fira Code VF", Helvetica, sans-serif;
+  font-size: 12.8px;
   scroll-behavior: smooth;
   overflow-x: hidden;
   margin: 0;

@@ -4,14 +4,14 @@ import { buildObjectFromJson } from '@utils/jsonUtils';
 export const function1 = {
   name: "function1",
   title: "Replacer",
-  description: "Provide a string template with {} and text. Generate a string by replacing the {} with the corresponding values from the parameters.",
+  description: "Provide a string template with {{key}} placeholders. Generate a string by replacing each {{key}} with the corresponding values from the parameters.",
   fields: [
     {
       key: "template",
       label: "Template",
       type: "text",
       rows: 6,
-      placeholder: "Today's weather is {weather}.",
+      placeholder: "Today's weather is {{weather}}.",
       triggerUpdates: [
         {
           "field": "input",
@@ -40,12 +40,11 @@ export const function1 = {
         return this.result;
       }
 
-      // Params in string {}
+      // Params in string {{}}
       const params = buildObjectFromJson(args.input ?? '');
 
       const prepared = prepareEscapes(args.template);
-      const output = prepared.replace(TOKEN_REGEX, (_, key) => {
-        const normalizedKey = key.trim();
+      const output = prepared.replace(TOKEN_REGEX, (_, normalizedKey) => {
         if (!(normalizedKey in params)) {
           throw new Error(`Missing parameter: ${normalizedKey}`);
         }
