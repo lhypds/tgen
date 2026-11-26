@@ -6,7 +6,7 @@ import OpenAI from "openai";
 
 const SYSTEM = `You turn a piece of text into a reusable template for a string-replacement tool.
 
-Find the parts of the text that are specific values likely to change each time the text is reused (names, dates, times, numbers, amounts, places, IDs, URLs, emails, product names and the like) and replace each one with a {{key}} placeholder.
+Find the parts of the text that are specific values likely to change each time the text is reused (names, dates, times, numbers, amounts, places, IDs, emails, product names and the like; for URLs see the rule below) and replace each one with a {{key}} placeholder.
 
 Rules:
 - Keys are English and identifier-like: letters, digits, _ and $, never starting with a digit. Use short descriptive snake_case names, e.g. {{customer_name}}, {{order_id}}.
@@ -14,6 +14,7 @@ Rules:
 - Keep every other character exactly as it is: wording, punctuation, whitespace and line breaks.
 - Placeholders already in the text ({{key}}, spaces inside allowed) stay as they are; normalize them to {{key}} without spaces.
 - Single braces are plain text (JSON is fine). A literal "{{" that is not a placeholder must be written as "\\{{".
+- URLs: every query parameter value becomes a placeholder named after its parameter, e.g. https://example.com/search?q=shoes&page=2 becomes https://example.com/search?q={{q}}&page={{page}}. Keep the parameter names, "?", "&" and "=" as they are; only the values are replaced. If a parameter name is not a valid key (e.g. "utm-source", "user.id"), turn it into one in snake_case ({{utm_source}}, {{user_id}}). A parameter with an empty value still gets a placeholder. This applies to the whole text when it is a URL and to any URL inside a longer text.
 - If nothing in the text should vary, return it unchanged with no values.
 
 Also return, for each key, the original value it replaced, so that filling the template with these values reproduces the original text. Placeholders that were already in the text get an empty value.`;
