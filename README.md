@@ -56,3 +56,7 @@ Useful Features
 
 Sharing functions with user pre-filled parameters.  
 Use a share button to generate a URL that encodes the function and its parameters.  
+
+AI placeholders (brain button): paste plain text into the Replacer's template and press the brain button.  
+AI (OpenAI) finds the parts that vary (names, dates, IDs...) and rewrites them as `{{key}}` placeholders, filling the input with the original values.  
+Needs `OPENAI_API_KEY` in `.env` (`OPENAI_MODEL` optional, default `gpt-4o-mini`) (see `.env.example`). The `/api/brain` endpoint is served by `npm run dev` and `npm run preview`.  

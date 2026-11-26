@@ -1,0 +1,45 @@
+.wrapper {
+  position: relative;
+}
+
+/* No height of its own: `rows` / minHeight set the starting one and the
+   handle takes it from there, never below minHeight. */
+.textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 0;
+  outline: 0;
+  background: #ffffff;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* 24px touch target in the corner; the three ruled lines stay pinned 4px in.
+   touch-action: none keeps a vertical drag from being taken as a scroll. */
+.handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  cursor: ns-resize;
+  touch-action: none;
+}
+
+.handle::before {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 10px;
+  height: 1px;
+  background: #999;
+  box-shadow:
+    0 -4px 0 #999,
+    0 -8px 0 #999;
+}

@@ -1,0 +1,47 @@
+.list {
+  border: 1px solid black;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  height: 28px;
+}
+
+.row + .row {
+  border-top: 1px solid black;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid black;
+  background: #f1f5f9;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Higher specificity than `.card input` in function.module.css */
+.row .value {
+  height: 100%;
+  width: 100%;
+  padding: 0 8px;
+  border: 0;
+  font: inherit;
+  font-size: 12px;
+  background: #ffffff;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px dashed black;
+  color: #64748b;
+  font-size: 12px;
+}

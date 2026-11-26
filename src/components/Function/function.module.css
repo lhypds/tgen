@@ -1,27 +1,27 @@
 .card {
   background: #ffffff;
-  border: 0.8px solid black;
-  padding: 12.8px;
-  margin-top: 12.8px;
+  border: 1px solid black;
+  padding: 10px 12px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 12.8px;
+  gap: 12px;
 }
 
 .titleRow {
   display: flex;
   align-items: center;
-  gap: 6.4px;
+  gap: 6px;
 }
 
 .titleDescription {
   display: flex;
   flex-direction: column;
-  gap: 6.4px;
+  gap: 4px;
 }
 
 .title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .description {
-  font-size: 12.8px;
+  font-size: 12px;
   font-weight: 400;
 }
 
@@ -44,39 +44,33 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 9.6px;
+  gap: 10px;
 }
 
 .actions {
   display: inline-flex;
   align-items: center;
-  gap: 4.8px;
+  gap: 6px;
 }
 
 .description {
   display: flex;
   flex-direction: column;
-  gap: 6.4px;
+  gap: 8px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  margin-bottom: 4px;
 }
 
 .card label {
   display: block;
-  margin-bottom: 4.8px;
   font-weight: 600;
-}
-
-.card textarea,
-.card input {
-  width: 100%;
-  border: 0.8px solid black;
-  padding: 8px;
-  font: inherit;
-  font-size: 11.2px;
-}
-
-.card textarea {
-  resize: vertical;
-  min-height: 32px;
+  font-size: 12px;
 }
 
 .card pre {
@@ -84,7 +78,10 @@
   white-space: pre-wrap;
   word-break: break-word;
   background: #f1f5f9;
-  padding: 9.6px;
+  border: 1px solid black;
+  padding: 8px;
+  font: inherit;
+  font-size: 12px;
 }
 
 .arguments {
@@ -94,13 +91,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9.6px;
-}
-
-.resultLabelRow {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  gap: 10px;
 }
 
 .result {
@@ -109,6 +100,11 @@
 
 .resultText {
   min-height: 32px;
+}
+
+.grid.column {
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 @media (max-width: 760px) {

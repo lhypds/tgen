@@ -1,13 +1,16 @@
 .actionButton {
   display: inline-flex;
   align-items: center;
-  border: 0.8px solid black;
+  border: 1px solid black;
   background: #ffffff;
   color: #0f172a;
-  padding: 3.2px 4.8px;
+  padding: 2px 4px;
   font: inherit;
   cursor: pointer;
   position: relative;
+  justify-content: center;
+  width: 22px;
+  height: 18px;
 }
 
 .actionButton:hover {
@@ -15,9 +18,25 @@
   color: white;
 }
 
+.actionButton:disabled {
+  cursor: progress;
+  background: black;
+  color: white;
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
 .icon {
-  width: 9.6px;
-  height: 9.6px;
+  width: 10px;
+  height: 10px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -30,13 +49,13 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(100% + 4.8px);
+  bottom: calc(100% + 4px);
   background: white;
   color: black;
-  border: 0.8px solid black;
-  font-size: 9.6px;
+  border: 1px solid black;
+  font-size: 12px;
   font-weight: 500;
-  padding: 2.4px 6.4px;
+  padding: 2px 6px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;

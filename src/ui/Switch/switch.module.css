@@ -1,0 +1,28 @@
+.switch {
+  display: inline-flex;
+  border: 1px solid black;
+}
+
+.option {
+  height: 18px;
+  padding: 0 6px;
+  border: 0;
+  background: #ffffff;
+  color: black;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.option + .option {
+  border-left: 1px solid black;
+}
+
+.option:hover {
+  background: #f1f5f9;
+}
+
+.option.active {
+  background: black;
+  color: white;
+}

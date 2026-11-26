@@ -15,11 +15,11 @@ body {
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-size: 13px;
 }
 
 body {
   font-family: "Fira Code VF", Helvetica, sans-serif;
-  font-size: 12.8px;
   scroll-behavior: smooth;
   overflow-x: hidden;
   margin: 0;

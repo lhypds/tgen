@@ -1,29 +1,65 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$ROOT_DIR"
-
-echo "[1/4] Pulling latest code..."
-git pull
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
 
 if ! command -v npm >/dev/null 2>&1; then
-	echo "Error: npm is not installed or not in PATH."
-	exit 1
+  echo "Error: npm is not installed or not in PATH."
+  exit 1
 fi
 
-echo "[2/4] Installing dependencies..."
-npm install
+echo "==> Pulling latest code..."
+git pull
 
-echo "[3/4] Setting up .env..."
 if [ ! -f .env ]; then
   cp .env.example .env
-  echo "  .env created from .env.example"
-else
-  echo "  .env already exists, skipping."
+  echo "Copied .env.example to .env"
 fi
 
-echo "[4/4] Building..."
+# Ask for a .env value that has none. Already-filled keys are left alone, and
+# with no terminal to ask on (ssh deploy, CI) it reports instead of hanging.
+ask_env() {
+  local key="$1" hint="$2" value
+  if grep -q "^$key=..*" .env; then
+    echo "$key is already set."
+    return 0
+  fi
+  if [ ! -t 0 ]; then
+    echo "$key is not set in $PWD/.env — fill it in and re-run this script."
+    return 0
+  fi
+  echo "$hint"
+  read -r -p "$key (press Enter to skip): " value || value=""
+  if [ -z "$value" ]; then
+    echo "Skipped — $key left empty."
+    return 0
+  fi
+  # Rewrite in place so comments and key order in .env survive. The value goes
+  # through the environment, so | / & \ and friends need no escaping.
+  if grep -q "^$key=" .env; then
+    VALUE="$value" awk -v k="$key" \
+      '$0 ~ "^" k "=" && !done { print k "=" ENVIRON["VALUE"]; done=1; next } { print }' \
+      .env > .env.tmp
+    mv .env.tmp .env
+  else
+    echo "$key=$value" >> .env
+  fi
+  echo "Saved $key to .env"
+}
+
+echo ""
+echo "==> Checking .env..."
+ask_env HOST \
+  "Public hostname tgen is served from, e.g. tgen.example.com — comma-separate several (leave empty for local development)."
+ask_env OPENAI_API_KEY \
+  "OpenAI API key for the brain button (leave empty to run without AI placeholders)."
+
+echo ""
+echo "==> Installing dependencies..."
+# Dev dependencies too: the build needs vite even when NODE_ENV=production
+npm install --include=dev
+
+echo "==> Building..."
 npm run build
 
-echo "Setup complete."
+echo ""
+echo "Setup complete. Run ./start.sh to start it under pm2."

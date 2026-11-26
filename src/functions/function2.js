@@ -4,12 +4,14 @@ export const function2 = {
   name: "function2",
   title: "Extractor & Replacer",
   description: "Provide an input string, a template1 with {{key}} placeholders, and a template2 with {{key}} placeholders. Extract values from the input string based on template1, and generate a new string by replacing the {{key}} in template2 with the extracted values.",
+  layout: "column",  // fields stacked top to bottom
+  brain: { field: "template1", fallbackField: "input" },  // AI turns template input (or the input example) into {{key}} placeholders
   fields: [
     {
       key: "input",
       label: "Input",
       type: "text",
-      rows: 6,
+      minHeight: 140,
       placeholder: "Paris is France's capital.",
       triggerUpdates: [],
     },
@@ -17,7 +19,7 @@ export const function2 = {
       key: "template1",
       label: "Template Input",
       type: "text",
-      rows: 6,
+      minHeight: 140,
       placeholder: "{{capital}} is {{country}}'s capital.",
       triggerUpdates: [],
     },
@@ -25,7 +27,7 @@ export const function2 = {
       key: "template2",
       label: "Template Output",
       type: "text",
-      rows: 6,
+      minHeight: 140,
       placeholder: "The capital of {{country}} is {{capital}}.",
       triggerUpdates: [],
     },

@@ -5,12 +5,14 @@ export const function1 = {
   name: "function1",
   title: "Replacer",
   description: "Provide a string template with {{key}} placeholders. Generate a string by replacing each {{key}} with the corresponding values from the parameters.",
+  layout: "column",  // fields stacked top to bottom
+  brain: { field: "template", valuesField: "input" },  // AI turns template values into {{key}} placeholders
   fields: [
     {
       key: "template",
       label: "Template",
       type: "text",
-      rows: 6,
+      minHeight: 180,
       placeholder: "Today's weather is {{weather}}.",
       triggerUpdates: [
         {
@@ -21,9 +23,10 @@ export const function1 = {
     },
     {
       key: "input",
-      label: "Input JSON",
-      type: "json",
-      rows: 6,
+      label: "Input",
+      type: "params",  // key value list or JSON
+      minHeight: 120,
+      emptyText: "Add {{key}} placeholders to the template",
       placeholder: '{\n  "weather": "sunny"\n}',
       triggerUpdates: [],
     },
