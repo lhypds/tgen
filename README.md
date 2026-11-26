@@ -59,4 +59,15 @@ Use a share button to generate a URL that encodes the function and its parameter
 
 AI placeholders (brain button): paste plain text into the Replacer's template and press the brain button.  
 AI (OpenAI) finds the parts that vary (names, dates, IDs...) and rewrites them as `{{key}}` placeholders, filling the input with the original values.  
-Needs `OPENAI_API_KEY` in `.env` (`OPENAI_MODEL` optional, default `gpt-4o-mini`) (see `.env.example`). The `/api/brain` endpoint is served by `npm run dev` and `npm run preview`.  
+Needs `OPENAI_API_KEY` in `.env` (`OPENAI_MODEL` optional, default `gpt-4o-mini`) (see `.env.example`). The `/api/brain` endpoint is served by `npm run dev` and `npm run preview` (a static `dist/` alone has no brain).
+
+
+Running with pm2
+----------------
+
+`./setup.sh`: pull, create `.env` (asks for `HOST` and `OPENAI_API_KEY`), install and build.  
+`./start.sh`: start (or reload) under pm2. It runs `vite preview` on `PORT`, named `PM2_NAME`.  
+`./stop.sh`: stop it.  
+`./restart.sh`: pull, install, build and restart (for redeploys).  
+
+Behind a reverse proxy, put the public hostname in `HOST` (comma-separate several), or Vite will refuse the requests.  
